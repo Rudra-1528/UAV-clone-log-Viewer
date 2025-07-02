@@ -143,6 +143,8 @@ function setupMap() {
 }
 
 function setupCesium() {
+  Cesium.Ion.defaultAccessToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiJmNDljNjQ5NC00OTEyLTRiOWMtYjg2Mi01MDRiYzAzODhmYzIiLCJpZCI6MzE3ODMwLCJpYXQiOjE3NTE0NjE3NzF9.UzdFpgUGaKdnrVdwaZU30XDW5yng_AqF-tTTX_UCdQs"; 
+
   if (viewer) viewer.destroy();
 
   viewer = new Cesium.Viewer('cesiumContainer', {
