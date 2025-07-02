@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>RUDKRISH Log Viewer </title>
+
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css" />
+  <link rel="stylesheet" href="https://cesium.com/downloads/cesiumjs/releases/1.110/Build/Cesium/Widgets/widgets.css" />
+
+  <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+  <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"></script>
+  <script src="https://cesium.com/downloads/cesiumjs/releases/1.110/Build/Cesium/Cesium.js"></script>
+
+  <style>
+    #cesiumContainer {
+      height: 400px;
+      width: 100%;
+      margin-top: 20px;
+      border: 1px solid #ccc;
+    }
+  </style>
+</head>
+<body>
+  <!-- Sidebar (initially hidden) -->
+  <div class="sidebar" id="sidebar">
+    <h2>🛰️ RUDKRISH Viewer</h2>
+    <ul>
+      <li>📂 Logs</li>
+      <li>📊 Charts</li>
+      <li>🗺️ Map</li>
+      <li>🌐 Cesium</li>
+      <li>⚙️ Settings</li>
+    </ul>
+  </div>
+
+  <!-- Toggle Button (shown only after upload) -->
+  <div id="sidebarToggle" class="toggle-btn" style="display: none;">☰</div>
+
+  <!-- Main Content -->
+  <div class="main" id="mainContent">
+
+    <!-- Upload Bar (always visible like PX4) -->
+      
+    <div class="upload-screen" id="uploadScreen">
+        <div class="upload-card" id="dropZone">
+         <h2>📁 Upload RUDKRISH Log File</h2>
+         <p>Drag & drop your <code>.csv</code> file here or click to browse</p>
+         <input type="file" id="logFile" accept=".csv" hidden />
+         <button id="browseBtn">📂 Browse</button>
+         <p style="margin-top: 10px;">Optional Events File:</p>
+         <input type="file" id="eventFile" accept=".csv" />
+       </div>
+    </div>
+
+
+    <!-- Viewer Content (hidden before upload) -->
+    <div id="viewerContent" style="display: none;">
+      <label for="timeSlider">⏱️ Time: <span id="timeDisplay">0</span></label>
+      <input type="range" id="timeSlider" min="0" max="0" value="0" />
+
+      <div id="charts">
+        <div id="altitudePlot"></div>
+        <div id="batteryPlot"></div>
+        <div id="speedPlot"></div>
+      </div>
+
+      <div id="summary">
+        <h3>📋 Flight Summary</h3>
+        <ul>
+          <li><strong>Max Altitude:</strong> <span id="maxAlt">-</span> m</li>
+          <li><strong>Min Battery Voltage:</strong> <span id="minVolt">-</span> V</li>
+          <li><strong>Flight Time:</strong> <span id="flightTime">-</span> s</li>
+          <li><strong>Distance Travelled:</strong> <span id="distance">-</span> m</li>
+        </ul>
+      </div>
+
+      <div id="map"></div>
+      <div id="cesiumContainer"></div>
+      <button id="downloadBtn">📥 Download Processed CSV</button>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+
+</html>
